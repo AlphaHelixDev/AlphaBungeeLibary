@@ -1,5 +1,5 @@
 name: AlphaBungeeLibary
 version: ${project.version}
 author: AlphaHelix
-main: de.alphahelix.alphabungeelibaryary.AlphaBungeeLibary
+main: de.alphahelix.alphabungeelibary.AlphaBungeeLibary
 description: Port of the AlphaLibary to BungeeCord
