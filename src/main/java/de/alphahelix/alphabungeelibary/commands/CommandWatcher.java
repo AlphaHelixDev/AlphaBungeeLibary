@@ -1,40 +1,52 @@
 package de.alphahelix.alphabungeelibary.commands;
 
-import de.alphahelix.alphabungeelibary.commands.arguments.IArgument;
+import de.alphahelix.alphabungeelibary.commands.arguments.Argument;
 
-import java.util.HashMap;
+import java.util.WeakHashMap;
 
 public class CommandWatcher {
 
-    private HashMap<Integer, IArgument<?>> arguments = new HashMap<>();
-    private String[] argumentsGiven = null;
+    private WeakHashMap<Integer, Argument<?>> args = new WeakHashMap<>();
+    private String[] argsGiven;
 
-    public CommandWatcher(String[] argumentsGiven) {
-        this.argumentsGiven = argumentsGiven;
+    public CommandWatcher(String[] argsGiven) {
+        this.argsGiven = argsGiven;
     }
 
-    public CommandWatcher addArgument(IArgument<?> arg) {
-        arguments.put(arguments.size(), arg);
+    public CommandWatcher addArguments(Argument<?>... arguments) {
+        for (Argument<?> a : arguments) {
+            args.put(args.size(), a);
+        }
+        submit();
         return this;
     }
 
-    public boolean isComperable() {
-        if (this.arguments.size() != argumentsGiven.length)
+    private void submit() {
+        if (this.args.size() == argsGiven.length) {
+            for (int i : this.args.keySet()) {
+                Argument<?> a = this.args.get(i);
+
+                a.setEnteredArgument(argsGiven[i]);
+            }
+        }
+    }
+
+    public boolean isSameLenght() {
+        if (this.args.size() != argsGiven.length) {
             return false;
+        }
 
-        for (int i = 0; i < argumentsGiven.length; i++) {
-            String currentArg = argumentsGiven[i];
-            IArgument<?> givenIArgument = this.arguments.get(i);
-
-            if (!givenIArgument.isCorrect(currentArg))
+        for (Argument<?> givenArgument : this.args.values()) {
+            if (!givenArgument.matches()) {
                 return false;
+            }
         }
 
         return true;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getArgument(int index) {
-        return ((IArgument<T>) arguments.get(index)).get(argumentsGiven[index]);
+    public <T, A extends Argument<T>> Argument<T> getArgument(int index, Class<A> typus) {
+        return ((Argument<T>) args.get(index));
     }
 }

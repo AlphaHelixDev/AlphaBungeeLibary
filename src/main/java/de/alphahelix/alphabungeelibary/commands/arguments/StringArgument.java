@@ -1,13 +1,13 @@
 package de.alphahelix.alphabungeelibary.commands.arguments;
 
-public class StringArgument implements IArgument<String> {
+public class StringArgument extends Argument<String> {
     @Override
-    public boolean isCorrect(String arg) {
+    public boolean matches() {
         return true;
     }
 
     @Override
-    public String get(String arg) {
-        return arg;
+    public String fromArgument() {
+        return getEnteredArgument();
     }
 }

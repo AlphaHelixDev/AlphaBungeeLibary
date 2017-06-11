@@ -2,7 +2,7 @@ package de.alphahelix.alphabungeelibary.commands.arguments;
 
 import java.util.ArrayList;
 
-public class BooleanArgument implements IArgument<Boolean> {
+public class BooleanArgument extends Argument<Boolean> {
 
     private ArrayList<String> trueStrings = new ArrayList<>();
     private ArrayList<String> falseStrings = new ArrayList<>();
@@ -15,13 +15,13 @@ public class BooleanArgument implements IArgument<Boolean> {
     }
 
     @Override
-    public boolean isCorrect(String arg) {
-        return trueStrings.contains(arg.toLowerCase()) || falseStrings.contains(arg.toLowerCase());
+    public boolean matches() {
+        return trueStrings.contains(getEnteredArgument().toLowerCase()) || falseStrings.contains(getEnteredArgument().toLowerCase());
     }
 
     @Override
-    public Boolean get(String arg) {
-        return isCorrect(arg) && trueStrings.contains(arg);
+    public Boolean fromArgument() {
+        return matches() && trueStrings.contains(getEnteredArgument().toLowerCase());
     }
 
     public void addBooleans(String trueString, String falseString) {

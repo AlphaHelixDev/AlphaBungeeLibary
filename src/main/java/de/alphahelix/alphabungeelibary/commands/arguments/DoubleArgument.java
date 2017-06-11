@@ -1,10 +1,10 @@
 package de.alphahelix.alphabungeelibary.commands.arguments;
 
-public class DoubleArgument implements IArgument<Double> {
+public class DoubleArgument extends Argument<Double> {
     @Override
-    public boolean isCorrect(String arg) {
+    public boolean matches() {
         try {
-            Double.parseDouble(arg);
+            Double.parseDouble(getEnteredArgument());
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -12,10 +12,9 @@ public class DoubleArgument implements IArgument<Double> {
     }
 
     @Override
-    public Double get(String arg) {
-        if (isCorrect(arg))
-            return Double.parseDouble(arg);
-        else
-            return 0.0;
+    public Double fromArgument() {
+        if (matches())
+            return Double.parseDouble(getEnteredArgument());
+        return 0.0;
     }
 }
