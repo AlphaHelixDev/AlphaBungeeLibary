@@ -1,6 +1,5 @@
 package de.alphahelix.alphabungeelibary.utils;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
@@ -138,14 +137,13 @@ public class MessageUtil {
 
     public static void sendCenteredMessage(ProxiedPlayer player, String message) {
         if (message == null || message.equals("")) return;
-        message = ChatColor.translateAlternateColorCodes('&', message);
 
         int messagePxSize = 0;
         boolean previousCode = false;
         boolean isBold = false;
 
         for (char c : message.toCharArray()) {
-            if (c == '§') {
+            if (c == '&') {
                 previousCode = true;
             } else if (previousCode) {
                 previousCode = false;
@@ -168,6 +166,6 @@ public class MessageUtil {
             sb.append(" ");
             compensated += spaceLength;
         }
-        player.sendMessage(new ComponentBuilder(sb.toString() + message).create());
+        player.sendMessage(new ComponentBuilder(sb.toString().replace("&", "§") + message.replace("&", "§")).create());
     }
 }
