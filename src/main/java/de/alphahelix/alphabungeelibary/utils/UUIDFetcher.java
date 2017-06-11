@@ -52,10 +52,10 @@ public class UUIDFetcher {
             PlayerUUID player = gson.fromJson(new BufferedReader(new InputStreamReader(connection.getInputStream())),
                     PlayerUUID.class);
 
-            if(player == null)
+            if (player == null)
                 return null;
 
-            if(player.getId() == null)
+            if (player.getId() == null)
                 return null;
 
             uuids.put(name, player.getId());
@@ -87,10 +87,10 @@ public class UUIDFetcher {
                     new BufferedReader(new InputStreamReader(connection.getInputStream())), PlayerUUID[].class);
             PlayerUUID currentName = allUserNames[allUserNames.length - 1];
 
-            if(currentName == null)
+            if (currentName == null)
                 return "StevenIsDaBossOver16Chars";
 
-            if(currentName.getName() == null) {
+            if (currentName.getName() == null) {
                 return "StevenIsDaBossOver16Chars";
             }
 
