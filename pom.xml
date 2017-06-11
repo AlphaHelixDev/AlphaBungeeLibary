@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.alphahelix</groupId>
-    <artifactId>AlphaBungeeAPI</artifactId>
+    <artifactId>AlphaBungeeLibary</artifactId>
     <version>1.1</version>
     <packaging>jar</packaging>
 
